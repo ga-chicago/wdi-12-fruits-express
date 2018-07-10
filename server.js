@@ -1,10 +1,15 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 //require the fruits model
 const Fruits = require('./models/fruits')
 // model names should be capitalized
 
+// middleware
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
 
 // index route
 // should show all the fruits

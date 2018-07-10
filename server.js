@@ -2,14 +2,31 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-//require the fruits model
+
+// MODELS-----------------------------------------
+// require the fruits model
 const Fruits = require('./models/fruits')
 // model names should be capitalized
 
-// middleware
+
+
+// MIDDLEWARE-----------------------------------------
+// note: all requests go thru middleware before they hit the route (car wash)
+// also note: ****** we app.use() middleware*****
+
+// bodyParser allows us to easily access form data from within req object
 app.use(bodyParser.urlencoded({
   extended: false
 }))
+
+// you can write your own middleware (example)
+app.use((req, res, next) => {
+  console.log('Hey! Thanks for stopping by!\nThis message is brought 2 u by MIDDLEWARE!\nAll routes must pass thru me. :)')
+  // this means: "ok, HTTP request, you may continue to wherever you were headed"
+  next(); 
+})
+
+
 
 // index route
 // should show all the fruits

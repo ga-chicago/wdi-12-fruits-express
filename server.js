@@ -45,7 +45,32 @@ app.get('/fruits/new', (req, res) => {
 // create route
 app.post('/fruits', (req, res) => {
   console.log(req.body) // sure would be nice if user form data was here
-  res.send('Post worked')
+  // if(req.body.readyToEat === 'on') {
+  //   req.body.readyToEat = true
+  // } else {
+  //   req.body.readyToEat = false
+  // }
+  // Fruits.push(req.body)
+
+
+  // actually take the data from the request and add it to our model
+  let ready = false
+  if(req.body.readyToEat === 'on') {
+    ready = true
+  }
+  const newFruit = {
+    name: req.body.name,
+    color: req.body.color,
+    readyToEat: ready
+  }
+  Fruits.push(newFruit)
+  console.log(Fruits)
+
+
+  // res.send('Post worked')
+  // let the user see that the fruit got added by redirecting them
+  // to index instead of just res.sending some text
+  res.redirect('/fruits')
 })
 
 // show route
@@ -56,6 +81,10 @@ app.get('/fruits/:index', (req, res) => {
   })
   //render is when you want to show an ejs template to the client
 })
+
+
+
+
 
 
 app.listen(3000, () => {

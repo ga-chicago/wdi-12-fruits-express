@@ -15,10 +15,16 @@ app.get('/fruits', (req, res) => {
 })
 
 // new route
+// show a form for user to enter data to add 
 app.get('/fruits/new', (req, res) => {
   res.render('new.ejs')
 })
 
+// create route
+app.post('/fruits', (req, res) => {
+  console.log(req.body) // sure would be nice if user form data was here
+  res.send('Post worked')
+})
 
 // show route
 // show just one fruit
